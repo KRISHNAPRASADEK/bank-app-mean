@@ -110,16 +110,16 @@ const deposit = (acno, amt) => {
 const fundTransfer = (req, toAcno, pswd, amt) => {
   let amount = Number(amt);
   let fromAcno = req.fromAcno;
-  return db.User.find({
+  return db.User.findOne({
     acno: fromAcno,
     password: pswd,
   }).then((result) => {
     console.log(result);
     if (result) {
       // debit account detailes
-      console.log("result " + result[0].acno);
+
       let fromAcnoBalance = result.balance;
-      console.log("fromAcnoBalance " + fromAcnoBalance);
+
       if (fromAcnoBalance >= amount) {
         result.balance = fromAcnoBalance - amount;
         // credit account detailes

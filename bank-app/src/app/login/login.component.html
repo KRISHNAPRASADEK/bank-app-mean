@@ -1,0 +1,73 @@
+<app-header></app-header>
+
+<div class="row">
+  <div class="col-7">
+    <img
+      class="m-2"
+      height="500px"
+      src="https://cdni.iconscout.com/illustration/premium/thumb/online-payment-with-mobile-2645883-2218295.png"
+      alt="login image"
+    />
+  </div>
+  <div class="col-5 mt-5">
+    <form
+      (ngSubmit)="login()"
+      [formGroup]="loginForm"
+      class="border p-5 mt-5 me-5"
+    >
+      <div class="mb-2">
+        <input
+          name="acno"
+          formControlName="acno"
+          placeholder="Account Number"
+          type="text"
+          class="form-control"
+        />
+      </div>
+      <div
+        *ngIf="
+          this.loginForm.get('acno')?.errors &&
+          this.loginForm.get('acno')?.touched
+        "
+        class="text-danger mb-2"
+      >
+        Invalid Account Number
+      </div>
+      <div class="mt-4 mb-2">
+        <input
+          name="pswd"
+          formControlName="pswd"
+          placeholder="Password"
+          type="password"
+          class="form-control"
+        />
+      </div>
+      <div
+        *ngIf="
+          this.loginForm.get('pswd')?.errors &&
+          this.loginForm.get('pswd')?.touched
+        "
+        class="text-danger mb-2"
+      >
+        Invalid Password
+      </div>
+      <div class="text-danger mb-2">{{ errorMsg }}</div>
+      <div class="mt-4">
+        <button type="submit" class="btn btn-primary">
+          Login &nbsp;
+          <span
+            *ngIf="successMsg"
+            class="spinner-border text-white"
+            role="status"
+          >
+            <span class="visually-hidden">Loading...</span>
+          </span>
+        </button>
+        &nbsp;
+        <span>
+          New User? Click Here to <a routerLink="/register">Register</a>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>

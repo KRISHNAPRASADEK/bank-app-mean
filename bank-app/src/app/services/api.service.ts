@@ -66,4 +66,19 @@ export class ApiService {
       this.appendToken()
     );
   }
+
+  // fund transfer
+  fundTransfer(toAcno: any, pswd: any, amount: any) {
+    const body = {
+      toAcno,
+      pswd,
+      amount,
+    };
+
+    return this.http.post(
+      'http://localhost:3000/fundTransfer/',
+      body,
+      this.appendToken()
+    );
+  }
 }

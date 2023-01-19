@@ -26,6 +26,8 @@ export class DashboardComponent implements OnInit {
   currentAcno: Number = 0;
   balance: Number = 0;
   depositMsg: string = '';
+  fundTransferSuccessMsg: string = '';
+  fundTransferErrorMsg: string = '';
 
   collapse() {
     this.isCollapse = !this.isCollapse;
@@ -58,7 +60,7 @@ export class DashboardComponent implements OnInit {
         },
         // error msg
         (result: any) => {
-          this.depositMsg = result.message;
+          this.depositMsg = result.error.message;
         }
       );
     } else {
@@ -79,5 +81,24 @@ export class DashboardComponent implements OnInit {
   }
 
   // transfer
-  transfer() {}
+  transfer() {
+    if (this.fundTransferForm.valid) {
+      let toAcno = this.fundTransferForm.value.toAcno;
+      let pswd = this.fundTransferForm.value.pswd;
+      let amount = this.fundTransferForm.value.amount;
+      // make api call for fund transfer
+      this.api.fundTransfer(toAcno, pswd, amount).subscribe(
+        //success
+        (result: any) => {
+          this.fundTransferSuccessMsg = result.message;
+        },
+        //error
+        (result: any) => {
+          this.fundTransferErrorMsg = result.error.message;
+        }
+      );
+    } else {
+      alert('Invalid Form');
+    }
+  }
 }

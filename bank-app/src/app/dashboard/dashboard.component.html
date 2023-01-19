@@ -45,6 +45,7 @@
               </li>
               <li>
                 <a
+                  role="button"
                   class="dropdown-item"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop"
@@ -252,7 +253,13 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="fundTransferForm" class="border p-5 mt-5 me-5">
+        <div class="text-center">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsBChUr8Nod7bNKV2pWb05nSgEMD2PKHiQuA&usqp=CAU"
+            alt="no image"
+          />
+        </div>
+        <form [formGroup]="fundTransferForm" class="border p-3">
           <div class="mb-2">
             <input
               name="toAcno"
@@ -307,26 +314,23 @@
           >
             Invalid Password
           </div>
-          <!-- <div class="text-danger mb-2">{{ errorMsg }}</div> -->
-          <div class="mt-4">
-            <button (click)="transfer()" type="submit" class="btn btn-primary">
-              Login &nbsp;
-              <!-- <span
-            *ngIf="successMsg"
-            class="spinner-border text-white"
-            role="status"
-          >
-            <span class="visually-hidden">Loading...</span>
-          </span> -->
-            </button>
+
+          <div class="text-success">
+            {{ fundTransferSuccessMsg }}
+          </div>
+          <div class="text-danger">
+            {{ fundTransferErrorMsg }}
           </div>
         </form>
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <button (click)="transfer()" type="submit" class="btn btn-primary">
+          Transfer
+        </button>
       </div>
     </div>
   </div>

@@ -91,14 +91,27 @@ export class DashboardComponent implements OnInit {
         //success
         (result: any) => {
           this.fundTransferSuccessMsg = result.message;
+          setTimeout(() => {
+            this.fundTransferSuccessMsg = '';
+          }, 3000);
         },
         //error
         (result: any) => {
           this.fundTransferErrorMsg = result.error.message;
+          setTimeout(() => {
+            this.fundTransferErrorMsg = '';
+          }, 3000);
         }
       );
     } else {
       alert('Invalid Form');
     }
+  }
+
+  // clear fund transfer form
+  clearFundTransferForm() {
+    this.fundTransferErrorMsg = '';
+    this.fundTransferSuccessMsg = '';
+    this.fundTransferForm.reset();
   }
 }

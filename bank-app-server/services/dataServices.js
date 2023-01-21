@@ -90,6 +90,12 @@ const deposit = (acno, amt) => {
     if (result) {
       // acno is present in db
       result.balance += amount;
+      result.transaction.push({
+        type: "CREDIT",
+        fromAcno: acno,
+        toAcno: acno,
+        amount,
+      });
 
       // to update in mongodb
       result.save();
@@ -115,6 +121,12 @@ const fundTransfer = (req, toAcno, pswd, amt) => {
     password: pswd,
   }).then((result) => {
     console.log(result);
+    if (fromAcno == toAcno) {
+      return {
+        statusCode: 401,
+        message: "Permission denied due to own account transfer!",
+      };
+    }
     if (result) {
       // debit account detailes
 
@@ -129,9 +141,21 @@ const fundTransfer = (req, toAcno, pswd, amt) => {
           if (creditData) {
             // credit acno is present in db
             creditData.balance += amount;
+            creditData.transaction.push({
+              type: "CREDIT",
+              fromAcno,
+              toAcno,
+              amount,
+            });
             // to update in mongodb
             creditData.save();
             console.log(creditData);
+            result.transaction.push({
+              type: "DEBIT",
+              fromAcno,
+              toAcno,
+              amount,
+            });
             result.save();
             console.log(result);
             return {
@@ -161,10 +185,30 @@ const fundTransfer = (req, toAcno, pswd, amt) => {
   });
 };
 
+const getAllTransactions = (req) => {
+  let acno = req.fromAcno;
+  return db.User.findOne({
+    acno,
+  }).then((result) => {
+    if (result) {
+      return {
+        statusCode: 200,
+        transaction: result.transaction,
+      };
+    } else {
+      return {
+        statusCode: 401,
+        message: "Invalid Account Number",
+      };
+    }
+  });
+};
+
 module.exports = {
   register,
   login,
   getBalance,
   deposit,
   fundTransfer,
+  getAllTransactions,
 };

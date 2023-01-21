@@ -81,4 +81,12 @@ export class ApiService {
       this.appendToken()
     );
   }
+
+  // all transactions api
+  getAllTransactions() {
+    return this.http.get(
+      'http://localhost:3000/all-transactions',
+      this.appendToken()
+    );
+  }
 }

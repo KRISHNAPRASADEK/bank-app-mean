@@ -114,4 +114,12 @@ server.post("/fundTransfer", jwtMiddleware, (req, res) => {
     });
 });
 
+// transaction history
+server.get("/all-transactions", jwtMiddleware, (req, res) => {
+  console.log("inside getalltransactions api");
+  dataService.getAllTransactions(req).then((result) => {
+    res.status(result.statusCode).json(result);
+  });
+});
+
 // requests are defined here

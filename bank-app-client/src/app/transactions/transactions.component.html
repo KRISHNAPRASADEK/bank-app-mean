@@ -1,0 +1,71 @@
+<!-- nabar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand ms-2" routerLink="/dashboard">
+      <h3 class="text-primary">
+        <i class="fa-solid fa-building-columns"></i>
+        &nbsp; Online Banking App
+      </h3>
+    </a>
+  </div>
+</nav>
+
+<!-- transaction body -->
+<div class="container-fluid mt-2">
+  <h1 class="text-primary">Transactions</h1>
+  <p style="text-align: justify">
+    This is dummy data: Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    Vitae similique ut illo velit quibusdam fuga sequi ipsam possimus facere
+    quisquam, magni quam, explicabo nulla! Consequatur excepturi doloremque quae
+    officia dolore. Lorem ipsum dolor sit amet, consectetur adipisicing elit. In
+    at velit commodi excepturi odio beatae corrupti ea natus. Tempora ratione
+    illum voluptates reprehenderit adipisci sunt explicabo odio vero sapiente
+    itaque.
+  </p>
+  <div class="container border p-5 mt-5">
+    <div class="row ms-3">
+      <div class="col-lg-4">
+        <h3 class="text-success">Transactions History</h3>
+      </div>
+      <div class="col-lg-4">
+        <label for="search">Search By:</label>&nbsp;
+        <input
+          (keyup)="search($event)"
+          id="search"
+          type="text"
+          placeholder="Transaction Type"
+        />
+      </div>
+      <div class="col-lg-4">
+        <input value="Export" type="button" class="btn btn-success" />
+      </div>
+    </div>
+
+    <!-- table -->
+    <table class="table border mt-3 text-center">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Transaction Type</th>
+          <th>From Account</th>
+          <th>To Account</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let transaction of allTransactions | filter : searchKey : 'type';
+            let i = index
+          "
+        >
+          <td>{{ i + 1 }}</td>
+          <td>{{ transaction.type }}</td>
+          <td>{{ transaction.fromAcno }}</td>
+          <td>{{ transaction.toAcno }}</td>
+          <td>{{ transaction.amount }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

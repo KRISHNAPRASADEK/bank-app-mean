@@ -89,4 +89,12 @@ export class ApiService {
       this.appendToken()
     );
   }
+
+  // delete a account
+  deleteAccount(acno: number) {
+    return this.http.delete(
+      'http://localhost:3000/delete-account/' + acno,
+      this.appendToken()
+    );
+  }
 }

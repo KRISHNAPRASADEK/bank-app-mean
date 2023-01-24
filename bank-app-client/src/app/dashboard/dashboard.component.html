@@ -1,4 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav
+  *ngIf="!deleteConfirm"
+  class="navbar navbar-expand-lg navbar-light bg-light"
+>
   <div class="container-fluid">
     <a class="navbar-brand ms-2" routerLink="/dashboard">
       <h3 class="text-primary">
@@ -70,12 +73,15 @@
               </li>
               <li><hr class="dropdown-divider" /></li>
               <li>
-                <a class="dropdown-item" href="#">
+                <a
+                  class="dropdown-item btn"
+                  (click)="deleteAccountFromNavbar()"
+                >
                   <i class="fa fa-solid fa-trash"></i> &nbsp;Delete
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item btn" (click)="logout()">
                   <i class="fa fa-solid fa-right-from-bracket"></i> &nbsp;Logout
                 </a>
               </li>
@@ -87,8 +93,52 @@
   </div>
 </nav>
 
-<div class="container">
+<!-- logout menu -->
+<div *ngIf="logoutDiv" class="container text-center mt-5">
   <div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4 text-cente">
+      <img
+        src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"
+        alt="logout-spinner"
+        class="logout-spinner"
+      />
+      <br />
+      <p class="text-danger"><b>Please wait while logging out...</b></p>
+    </div>
+    <div class="col-lg-4"></div>
+  </div>
+</div>
+<!-- logout menu -->
+<div *ngIf="deleteSpinnerDiv" class="container text-center mt-5">
+  <div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4 text-cente">
+      <img
+        src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"
+        alt="logout-spinner"
+        class="logout-spinner"
+      />
+      <br />
+      <p class="text-danger">
+        <b>Please wait while deleteing your account...</b>
+      </p>
+    </div>
+    <div class="col-lg-4"></div>
+  </div>
+</div>
+
+<!-- delete confirm page -->
+<!-- property binding -->
+<app-delete-confirm
+  (onDelete)="onDelete($event)"
+  (onCancel)="onCancel()"
+  [item]="acno"
+></app-delete-confirm>
+
+<!-- dashboard design -->
+<div *ngIf="!logoutDiv" class="container">
+  <div *ngIf="!deleteConfirm" class="row">
     <div class="col-md-5">
       <!-- {{user}} string interpolation -->
       <h1 class="" style="margin-top: 100px">

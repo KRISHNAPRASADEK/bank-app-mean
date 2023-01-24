@@ -24,10 +24,10 @@
   </p>
   <div class="container border p-5 mt-5">
     <div class="row ms-3">
-      <div class="col-lg-4">
+      <div class="col-lg-6">
         <h3 class="text-success">Transactions History</h3>
       </div>
-      <div class="col-lg-4">
+      <div class="col-lg-6">
         <label for="search">Search By:</label>&nbsp;
         <input
           (keyup)="search($event)"
@@ -35,9 +35,6 @@
           type="text"
           placeholder="Transaction Type"
         />
-      </div>
-      <div class="col-lg-4">
-        <input value="Export" type="button" class="btn btn-success" />
       </div>
     </div>
 
@@ -67,5 +64,13 @@
         </tr>
       </tbody>
     </table>
+
+    <button
+      (click)="generatePdf()"
+      type="button"
+      class="btn btn-success btn-block"
+    >
+      Download as PDF
+    </button>
   </div>
 </div>

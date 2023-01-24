@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from '../services/api.service';
 import party from 'party-js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,13 +29,26 @@ export class DashboardComponent implements OnInit {
   depositMsg: string = '';
   fundTransferSuccessMsg: string = '';
   fundTransferErrorMsg: string = '';
+  logoutDiv: boolean = false;
+  deleteSpinnerDiv: boolean = false;
+  acno: any = '';
+  deleteConfirm: boolean = false;
 
   collapse() {
     this.isCollapse = !this.isCollapse;
   }
-  constructor(private api: ApiService, private fb: FormBuilder) {}
+  constructor(
+    private api: ApiService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    if (!localStorage.getItem('token')) {
+      alert('Please Login!');
+      this.router.navigateByUrl('');
+    }
+
     if (localStorage.getItem('username')) {
       this.user = localStorage.getItem('username') || '';
     }
@@ -113,5 +127,40 @@ export class DashboardComponent implements OnInit {
     this.fundTransferErrorMsg = '';
     this.fundTransferSuccessMsg = '';
     this.fundTransferForm.reset();
+  }
+
+  logout() {
+    localStorage.clear();
+    this.logoutDiv = true;
+    setTimeout(() => {
+      this.router.navigateByUrl('');
+      this.logoutDiv = false;
+    }, 4000);
+  }
+
+  deleteAccountFromNavbar() {
+    this.acno = localStorage.getItem('currentAcno');
+    this.deleteConfirm = true;
+  }
+
+  onCancel() {
+    this.acno = '';
+    this.deleteConfirm = false;
+  }
+  onDelete(event: any) {
+    let deleteAcno = JSON.parse(event);
+    this.api.deleteAccount(deleteAcno).subscribe(
+      (result: any) => {
+        localStorage.clear();
+        this.deleteSpinnerDiv = true;
+        setTimeout(() => {
+          this.router.navigateByUrl('');
+          this.deleteSpinnerDiv = false;
+        }, 3000);
+      },
+      (result: any) => {
+        alert(result.error.message);
+      }
+    );
   }
 }

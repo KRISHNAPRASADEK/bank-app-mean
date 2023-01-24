@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +21,7 @@ import { FilterPipe } from './pipes/filter.pipe';
     DashboardComponent,
     TransactionsComponent,
     FilterPipe,
+    DeleteConfirmComponent,
   ],
   imports: [
     BrowserModule,

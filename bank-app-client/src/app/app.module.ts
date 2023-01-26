@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +23,7 @@ import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.componen
     TransactionsComponent,
     FilterPipe,
     DeleteConfirmComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

@@ -185,6 +185,7 @@ const fundTransfer = (req, toAcno, pswd, amt) => {
   });
 };
 
+// get all transaction history
 const getAllTransactions = (req) => {
   let acno = req.fromAcno;
   return db.User.findOne({
@@ -204,6 +205,26 @@ const getAllTransactions = (req) => {
   });
 };
 
+// delete my account
+const deleteMyAccount = (acno) => {
+  return db.User.deleteOne({
+    acno,
+  }).then((result) => {
+    if (result) {
+      return {
+        statusCode: 200,
+        message: "Account deleted successfully",
+      };
+    } else {
+      return {
+        statusCode: 401,
+        message: "Invalid Account",
+      };
+    }
+  });
+};
+
+//export
 module.exports = {
   register,
   login,
@@ -211,4 +232,5 @@ module.exports = {
   deposit,
   fundTransfer,
   getAllTransactions,
+  deleteMyAccount,
 };

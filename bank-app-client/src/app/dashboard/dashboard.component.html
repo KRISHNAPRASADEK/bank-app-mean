@@ -93,47 +93,39 @@
   </div>
 </nav>
 
-<!-- logout menu -->
-<div *ngIf="logoutDiv" class="container text-center mt-5">
-  <div class="row">
-    <div class="col-lg-4"></div>
-    <div class="col-lg-4 text-cente">
-      <img
-        src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"
-        alt="logout-spinner"
-        class="logout-spinner"
-      />
-      <br />
-      <p class="text-danger"><b>Please wait while logging out...</b></p>
-    </div>
-    <div class="col-lg-4"></div>
+<!-- delete Spinner -->
+<div *ngIf="deleteSpinnerDiv" class="container mt-5">
+  <div class="text-center">
+    <img
+      class="logout"
+      src="https://gifimage.net/wp-content/uploads/2018/11/loading-gif-free-download-6.gif"
+      alt="logout spinner"
+    />
+    <h5 class="text-danger">
+      <b>Please wait while deleting your account..</b>
+    </h5>
   </div>
 </div>
-<!-- logout menu -->
-<div *ngIf="deleteSpinnerDiv" class="container text-center mt-5">
-  <div class="row">
-    <div class="col-lg-4"></div>
-    <div class="col-lg-4 text-cente">
-      <img
-        src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"
-        alt="logout-spinner"
-        class="logout-spinner"
-      />
-      <br />
-      <p class="text-danger">
-        <b>Please wait while deleteing your account...</b>
-      </p>
-    </div>
-    <div class="col-lg-4"></div>
+
+<!-- logout spinner  -->
+<div *ngIf="logoutDiv" class="container mt-5">
+  <div class="text-center">
+    <img
+      class="logout"
+      src="https://gifimage.net/wp-content/uploads/2018/11/loading-gif-free-download-6.gif"
+      alt="logout spinner"
+    />
+    <h5 class="text-primary"><b>Please wait while Logging out..</b></h5>
   </div>
 </div>
 
 <!-- delete confirm page -->
-<!-- property binding -->
+<!-- property binding [item]="acno" -->
 <app-delete-confirm
   (onDelete)="onDelete($event)"
   (onCancel)="onCancel()"
   [item]="acno"
+  [name]="user"
 ></app-delete-confirm>
 
 <!-- dashboard design -->
@@ -356,7 +348,7 @@
               name="amount"
               formControlName="amount"
               placeholder="Enter Amount"
-              type="password"
+              type="text"
               class="form-control"
             />
           </div>
@@ -367,7 +359,7 @@
             "
             class="text-danger mb-2"
           >
-            Invalid Password
+            Invalid Amount
           </div>
 
           <div class="text-success">

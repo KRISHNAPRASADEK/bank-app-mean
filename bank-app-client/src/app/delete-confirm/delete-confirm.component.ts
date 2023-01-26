@@ -7,6 +7,7 @@ import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class DeleteConfirmComponent implements OnInit {
   @Input() item: string | undefined;
+  @Input() name: string | undefined;
   @Output() onCancel = new EventEmitter();
   @Output() onDelete = new EventEmitter();
 

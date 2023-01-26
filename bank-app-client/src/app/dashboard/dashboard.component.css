@@ -1,3 +1,5 @@
-.row .logout-spinner {
-  width: 350px;
+.logout {
+  width: 200px;
+  height: 200px;
+  margin: 60px 0;
 }

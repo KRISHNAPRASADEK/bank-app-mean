@@ -122,4 +122,12 @@ server.get("/all-transactions", jwtMiddleware, (req, res) => {
   });
 });
 
+// delete account api
+server.delete("/delete-account/:acno", jwtMiddleware, (req, res) => {
+  console.log("Inside deletemyaccount api");
+  dataService.deleteMyAccount(req.params.acno).then((result) => {
+    res.status(result.statusCode).json(result);
+  });
+});
+
 // requests are defined here

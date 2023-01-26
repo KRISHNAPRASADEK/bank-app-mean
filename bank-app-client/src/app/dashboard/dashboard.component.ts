@@ -107,6 +107,7 @@ export class DashboardComponent implements OnInit {
           this.fundTransferSuccessMsg = result.message;
           setTimeout(() => {
             this.fundTransferSuccessMsg = '';
+            this.fundTransferForm.reset();
           }, 3000);
         },
         //error
@@ -135,7 +136,7 @@ export class DashboardComponent implements OnInit {
     setTimeout(() => {
       this.router.navigateByUrl('');
       this.logoutDiv = false;
-    }, 4000);
+    }, 3000);
   }
 
   deleteAccountFromNavbar() {
@@ -151,6 +152,7 @@ export class DashboardComponent implements OnInit {
     let deleteAcno = JSON.parse(event);
     this.api.deleteAccount(deleteAcno).subscribe(
       (result: any) => {
+        this.acno = '';
         localStorage.clear();
         this.deleteSpinnerDiv = true;
         setTimeout(() => {
